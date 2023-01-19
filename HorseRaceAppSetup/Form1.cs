@@ -22,22 +22,11 @@ namespace HorseRaceAppSetup
             "Storm", "Rose", "Storm", "Cloud" };
 
         Random randInt = new Random();
-
-        //SC5
         List<Horse> horses = new List<Horse>();
 
 
-        
-
-
-
-        //Horse Names: use these to create your race horses
-        /*"Bella","Sugar","Alex","Alexia","Lady","Tucker","Fancy","Cash", "Dakota","Daisy","Spirit","Cisco","Annie","Buddy","Chance","Dallas","Star","Scout","Lucky","LadyBug","Stinky","Cricket","Magic","Red","Bruno","Sunshine","Storm","Rose","Storm","Cloud" 
-        */
-
-
         //Student Point
-        //960112
+        //<enter student id here>
         private void setHorse()
         {
             
@@ -129,6 +118,12 @@ namespace HorseRaceAppSetup
         {
 
             bool isNumberValid=false, isNameValid = false;
+
+            if(string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtNumber.Text))
+            {
+                MessageBox.Show("Please enter in a name and number.");
+            }
+            
 
 
             if(!txtName.Text.Equals("Name Entry") && !string.IsNullOrEmpty(txtName.Text))
