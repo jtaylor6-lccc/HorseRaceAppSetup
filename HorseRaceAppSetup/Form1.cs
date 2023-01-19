@@ -15,10 +15,10 @@ namespace HorseRaceAppSetup
     {
 
         //initialization
-        List<string> availableNames = new List<string>() { "Bella", "Sugar", "Alex", "Alexia", 
-            "Lady", "Tucker", "Fancy", "Cash", "Dakota", "Daisy", "Spirit", "Cisco", 
-            "Annie", "Buddy", "Chance", "Dallas", "Star", "Scout", "Lucky", 
-            "LadyBug", "Stinky", "Cricket", "Magic", "Red", "Bruno", "Sunshine", 
+        List<string> availableNames = new List<string>() { "Bella", "Sugar", "Alex", "Alexia",
+            "Lady", "Tucker", "Fancy", "Cash", "Dakota", "Daisy", "Spirit", "Cisco",
+            "Annie", "Buddy", "Chance", "Dallas", "Star", "Scout", "Lucky",
+            "LadyBug", "Stinky", "Cricket", "Magic", "Red", "Bruno", "Sunshine",
             "Storm", "Rose", "Storm", "Cloud" };
 
         Random randInt = new Random();
@@ -29,28 +29,8 @@ namespace HorseRaceAppSetup
         //<enter student id here>
         private void setHorse()
         {
-            
-        }
-        //Given by VS. 
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        //This method runs when the form starts 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            btnMax.Enabled = false;
-            btnMin.Enabled = false;
-            btnAddHorse.Enabled = false;
-
-        }
-
-        
-        
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
             //SC5 and SC6
-            for(int x = 0; x < 10; x++)
+            for (int x = 0; x < 10; x++)
             {
                 int nameIndex, raceIndex;
                 string horseName;
@@ -71,6 +51,26 @@ namespace HorseRaceAppSetup
 
                 //listHorses1.Text += $"{horseName} #{raceIndex} \n";
             }
+        }
+        //Given by VS. 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+        //This method runs when the form starts 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            btnMax.Enabled = false;
+            btnMin.Enabled = false;
+            btnAddHorse.Enabled = false;
+
+        }
+
+
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            setHorse();
 
             //set UI buttons
             btnMax.Enabled = true;
@@ -78,24 +78,24 @@ namespace HorseRaceAppSetup
             btnAddHorse.Enabled = true;
             btnCreate.Enabled = false;
         }
-        
+
         //SC9 - Student Point
         private void btnMax_Click(object sender, EventArgs e)
         {
-            
-            Horse highestHorse = new Horse("nobody",0);
 
-            foreach(Horse h in horses)
+            Horse highestHorse = new Horse("nobody", 0);
+
+            foreach (Horse h in horses)
             {
-                if(h.getNumber() >= highestHorse.getNumber())
+                if (h.getNumber() >= highestHorse.getNumber())
                 {
                     highestHorse = h;
                 }
             }
 
             lblMax.Text = highestHorse.getNumber().ToString();
-            
-        } 
+
+        }
 
         //SC10 - Student Point
         private void btnMin_Click(object sender, EventArgs e)
@@ -117,37 +117,19 @@ namespace HorseRaceAppSetup
         private void btnAddHorse_Click(object sender, EventArgs e)
         {
 
-            bool isNumberValid=false, isNameValid = false;
-
-            if(string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtNumber.Text))
+            //account for either value being empty
+            //account for default values not being changes
+            if (string.IsNullOrEmpty(txtName.Text) ||
+                string.IsNullOrEmpty(txtNumber.Text) || 
+                txtName.Text.Equals("Name Entry") || 
+                txtNumber.Text.Equals("Number Entry"))
             {
                 MessageBox.Show("Please enter in a name and number.");
             }
-            
-
-
-            if(!txtName.Text.Equals("Name Entry") && !string.IsNullOrEmpty(txtName.Text))
+            else if (int.TryParse(txtNumber.Text, out int retval) == false || retval < 0 || retval > 99)         //account for txtNumber actually being an integer
             {
-                isNameValid = true;
+                MessageBox.Show("Please Enter a whole number for the horse #");
             }
-
-            if (!txtNumber.Text.Equals("Number Entry") && !string.IsNullOrEmpty(txtName.Text))
-            {
-                isNameValid = true;
-            }
-
-
-
-            if (isNumberValid && isNameValid)
-            {
-                MessageBox.Show("Add Horsey....");
-            }
-            else
-            {
-                MessageBox.Show("I don't thing so buddy!!!!");
-            }
-
-
         }
 
         private void listHorses1_SelectedIndexChanged(object sender, EventArgs e)
